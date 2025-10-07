@@ -19,5 +19,13 @@ class Phone extends Model
         'phone_price',
         'phone_display_size',
         'phone_is_smartphone',
+        'categoria_id',
+        'codigo_barras',
     ];
+
+    // Definir relación con Categoria (pertenece a)
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
 }

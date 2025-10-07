@@ -2,21 +2,24 @@
 
 namespace Database\Factories;
 
+use App\Models\Phone;
+use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Phone>
- */
 class PhoneFactory extends Factory
 {
-    public function definition(): array
+    protected $model = Phone::class;
+
+    public function definition()
     {
         return [
-            'phone_brand' => $this->faker->company,
-            'phone_model' => $this->faker->word,
-            'phone_price' => $this->faker->randomFloat(2, 100, 1500),
-            'phone_display_size' => $this->faker->numberBetween(4, 7),
-            'phone_is_smartphone' => $this->faker->boolean(90),
+            'phone_brand' => $this->faker->company(),
+            'phone_model' => $this->faker->word(),
+            'phone_price' => $this->faker->randomFloat(2, 100, 1000),
+            'phone_display_size' => $this->faker->numberBetween(3, 10),
+            'phone_is_smartphone' => $this->faker->boolean(),
+            'categoria_id' => Categoria::inRandomOrder()->first()->id ?? null,
+            'codigo_barras' => $this->faker->bothify('?#?#?#?#?#?'), // cadena aleatoria ejemplo
         ];
     }
 }

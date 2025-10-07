@@ -8,12 +8,10 @@ use Illuminate\Http\Request;
 
 class PhoneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return Phone::all();
+        // Si quieres, puedes incluir la categoría aquí también:
+        return Phone::with('categoria')->get();
     }
 
     public function store(StorePhoneRequest $request)
@@ -23,7 +21,9 @@ class PhoneController extends Controller
 
     public function show($id)
     {
-        return Phone::findOrFail($id);
+        // Incluye toda la info de la categoría relacionada
+        $phone = Phone::with('categoria')->findOrFail($id);
+        return response()->json($phone);
     }
 
     public function update(StorePhoneRequest $request, $id)
@@ -32,6 +32,7 @@ class PhoneController extends Controller
         $phone->update($request->validated());
         return $phone;
     }
+
     public function destroy($id)
     {
         $phone = Phone::findOrFail($id);

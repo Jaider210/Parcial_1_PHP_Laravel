@@ -11,14 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Si quieres seguir creando un usuario de prueba, deja este bloque:
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Seeder para Categorías primero
+        $this->call(\Database\Seeders\CategoriaSeeder::class);
 
-        // Aquí llamamos a nuestro seeder personalizado:
-        $this->call(PhoneSeeder::class);
+        // Luego el seeder para Phones
+        $this->call(\Database\Seeders\PhoneSeeder::class);
     }
 }
-
